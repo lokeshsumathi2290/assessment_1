@@ -22,6 +22,7 @@ mysql -uroot -pmysqlPassword -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENT
 mysql -uroot -pmysqlPassword -e "select user, host FROM mysql.user;"
 killall mysqld
 sleep 10
+echo
 }
 
 # Call all functions
