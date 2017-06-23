@@ -1,4 +1,4 @@
-Assessment using Linux,Docker,Apache,Tomcat,MySQL,Shell and AWS
+To Launch a Stack with Apache, Tomcat and MySQL using Docker
 
 Navigate to assessment_1/startup_script/ and excute startup.sh
 
