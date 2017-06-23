@@ -1,9 +1,8 @@
-# assessment_1
-Assessment using Linux,Docker,Apache,Tomcat,MySQL,Shell
+Assessment using Linux,Docker,Apache,Tomcat,MySQL,Shell and AWS
 
 Navigate to assessment_1/startup_script/ and excute startup.sh
 
-You can acces your tomcat console by typing http://you_ip:8080 in your browser
+You can now access your tomcat console by typing http://you_ip:8080 in your browser
 
 Apache can accessed by typing http://you_ip in your browser
 

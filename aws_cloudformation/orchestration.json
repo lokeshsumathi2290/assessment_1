@@ -1,0 +1,92 @@
+{  
+   "AWSTemplateFormatVersion":"2010-09-09",
+   "Description":"orchestration",
+   "Parameters":{  
+      "ImageId":{  
+         "Type":"String",
+         "Description":"Type in AMI id eg: ami-8da700e2"
+      },
+      "SubnetId":{  
+         "Type":"String",
+		 "Description":"Enter a public subnet from the list eg: subnet-70a8eb58"
+      },
+      "SecurityGroupIds":{  
+         "Type":"List<AWS::EC2::SecurityGroup::Id>",
+         "Description":"Select a security group which allows 80,8080,22 and 3306 port to office ip"
+      },
+      "InstanceType":{  
+         "Description":"EC2 instance type",
+         "Type":"String",
+         "Default":"t2.micro",
+         "ConstraintDescription":"Must be a valid EC2 instance type."
+      },
+      "Monitoring":{  
+         "Type":"String",
+         "Default":false,
+         "AllowedValues":[  
+            true,
+            false
+         ]
+      },
+      "KeyPairName":{  
+         "Type":"String",
+         "Description":"Enter a valide KeyPair Name"
+      }
+   },
+   "Resources":{  
+      "orchinstance":{  
+         "Type":"AWS::EC2::Instance",
+         "Properties":{  
+            "ImageId":{  
+               "Ref":"ImageId"
+            },
+            "SubnetId":{  
+               "Ref":"SubnetId"
+            },
+            "SecurityGroupIds":{  
+               "Ref":"SecurityGroupIds"
+            },
+            "InstanceType":{  
+               "Ref":"InstanceType"
+            },
+            "Monitoring":{  
+               "Ref":"Monitoring"
+            },
+            "KeyName":{  
+               "Ref":"KeyPairName"
+            },
+            "UserData":{  
+               "Fn::Base64":{  
+                  "Fn::Join":[  
+                     "",
+                     [  
+                        "#!/bin/bash\n",
+                        "apt-get update -y -q\n",
+                        "apt-get install git docker.io -y -q\n",
+						"yum erase docker-engine-selinux -y\n",
+                        "yum update -y -q\n",
+                        "yum install git -y -q\n",
+						"yum install docker --skip-broken -y -q\n",
+						"setenforce 0\n",
+						"service docker start\n",
+						"service iptables stop\n",
+						"chkconfig docker on\n",
+						"systemctl stop firewalld\n",
+						"systemctl disable firewalld\n",
+						"systemctl start docker\n",
+						"systemctl enable docker\n",
+                        "mkdir github\n",
+                        "cd github\n",
+                        "git init\n",
+                        "git clone https://github.com/lokeshsumathi2290/assessment_1.git\n",
+                        "cd assessment_1/startup_script\n",
+                        "git checkout master\n",
+                        "sh -x startup.sh\n"
+                     ]
+                  ]
+               }
+            }
+         }
+      }
+   }
+}
