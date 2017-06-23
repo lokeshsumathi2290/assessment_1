@@ -1,9 +1,9 @@
-To Launch a Stack with Apache, Tomcat and MySQL using Docker
+#To Launch a Stack with Apache, Tomcat and MySQL using Docker
 
-Navigate to assessment_1/startup_script/ and excute startup.sh
+1.Navigate to assessment_1/startup_script/ and excute startup.sh
 
-You can now access your tomcat console by typing http://you_ip:8080 in your browser
+2.You can now access your tomcat console by typing http://you_ip:8080 in your browser
 
-Apache can accessed by typing http://you_ip in your browser
+3.Apache can accessed by typing http://you_ip in your browser
 
-Connect MySQL from your local machine using mysql -h your_ip -u root -pmysqlPassword
+4.Connect MySQL from your local machine using mysql -h your_ip -u root -pmysqlPassword
